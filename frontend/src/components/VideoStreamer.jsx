@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 // Replace with your actual backend URL
 const BACKEND_URL = import.meta.env.PROD 
-  ? 'https://your-backend-deployment-url.vercel.app' 
-  : 'http://localhost:5000'
+  ? 'https://video-straming-backend.vercel.app' 
+  : 'http://localhost:5000' || 'http://localhost:2999'
 
 function VideoStreamer() {
   const [videos, setVideos] = useState([]);
