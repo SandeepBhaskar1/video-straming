@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../App.css';  // Import the CSS for styling
 
 // Replace with your actual backend URL
 const BACKEND_URL = import.meta.env.PROD 
@@ -32,62 +33,77 @@ function VideoStreamer() {
     fetchVideos();
   }, []);
 
-  const handleVideoSelect = (event) => {
-    setSelectedVideo(event.target.value);
-    setVideoUrl('');
+  const handleVideoSelect = (videoName) => {
+    setSelectedVideo(videoName);
+    // Set the video URL to immediately stream the selected video
+    const streamUrl = `${BACKEND_URL}/video?videoName=${encodeURIComponent(videoName)}`;
+    setVideoUrl(streamUrl);
   };
 
-  const streamVideo = () => {
-    if (selectedVideo) {
-      const streamUrl = `${BACKEND_URL}/video?videoName=${encodeURIComponent(selectedVideo)}`;
-      setVideoUrl(streamUrl);
-    }
+  // Mapping video filenames to custom names
+  const videoNameMap = {
+    'the-fast-and-furious.mp4': 'The Fast and Furious',
+    '2-fast-furious.mp4': '2 Fast 2 Furious',
+    'tokyo-drift.mp4': 'Tokyo Drift',
+    'fast-furious-4.mp4': 'Fast & Furious',
+    'fast-5.mp4': 'Fast Five',
+    'fast-furious-6.mp4': 'Fast & Furious 6',
+    'furious-7.mp4': 'Furious 7',
+    'furious-8.mp4': 'The Fate of the Furious',
+    'fast-furious-9.mp4': 'F9',
+    'fast-x.mp4': 'Fast X',
   };
+
+  // Custom order (manual reordering)
+  const customOrder = [
+    'the-fast-and-furious.mp4',
+    '2-fast-furious.mp4',
+    'tokyo-drift.mp4',
+    'fast-furious-4.mp4',
+    'fast-5.mp4',
+    'fast-furious-6.mp4',
+    'furious-7.mp4',
+    'furious-8.mp4',
+    'fast-furious-9.mp4',
+    'fast-x.mp4',
+  ];
+
+  // Reorder the fetched videos based on customOrder
+  const orderedVideos = customOrder.filter(video => videos.includes(video));
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-4 text-center">Video Streamer</h1>
-        
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            {error}
-          </div>
-        )}
+    <div className="video-container">
+      <h1 className="video-title">The Fast And Furious Movie Series Trailers</h1>
 
-        <div className="mb-4 flex space-x-2">
-          <select 
-            value={selectedVideo} 
-            onChange={handleVideoSelect}
-            className="flex-grow border rounded p-2"
-          >
-            <option value="">Select a Video</option>
-            {videos.map((video) => (
-              <option key={video} value={video}>{video}</option>
-            ))}
-          </select>
-          
-          <button 
-            onClick={streamVideo}
-            disabled={!selectedVideo}
-            className="bg-blue-500 text-white px-4 py-2 rounded 
-                       hover:bg-blue-600 disabled:bg-gray-300"
-          >
-            Stream Video
-          </button>
+      {error && (
+        <div className="error-message">
+          {error}
         </div>
+      )}
 
-        {videoUrl && (
-          <div className="mt-4">
-            <video 
-              controls 
-              src={videoUrl} 
-              className="w-full rounded-lg shadow-md"
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        )}
+      {videoUrl && (
+        <div className="video-player-container">
+          <video 
+            controls 
+            src={videoUrl} 
+            className="video-player"
+            autoPlay // Automatically play the video when selected
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+
+      <div className="video-button-container">
+        {orderedVideos.map((video) => (
+          <button 
+            key={video}
+            onClick={() => handleVideoSelect(video)}
+            className="video-button"
+          >
+            {videoNameMap[video] || video.replace('.mp4', '').replace('-', ' ').toUpperCase()}
+          </button>
+        ))}
       </div>
     </div>
   );

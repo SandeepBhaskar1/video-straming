@@ -1,42 +1,155 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('./assets/f&f.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.video-container {
+  position: relative;
   text-align: center;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  border-radius: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.video-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #f5f5f5;
+  text-shadow: 2px 2px 5px black;
+  letter-spacing: 2px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.error-message {
+  color: red;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Button container */
+.video-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px; 
+  margin-top: 20px;
+  z-index: 2;
+}
+
+.video-button {
+  margin: 10px;
+  padding: 12px 24px;
+  background-color: #383838;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.video-button:hover {
+  background-color: #000000;
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+}
+
+.video-button:focus {
+  outline: none;
+}
+
+.video-player-container {
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.video-player {
+  width: 100%;
+  max-width: 1080px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+@media (min-width: 1200px) {
+  .video-title {
+    font-size: 3.5rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .video-button {
+    font-size: 18px;
+    padding: 15px 30px;
+  }
+
+  .video-player {
+    width: 80%;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 1199px) and (min-width: 768px) {
+  .video-title {
+    font-size: 2.5rem;
+  }
+
+  .video-button {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .video-player {
+    width: 90%;
   }
 }
 
-.card {
-  padding: 2em;
+@media (max-width: 767px) {
+  .video-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .video-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 8px;
+  }
+
+  .video-player {
+    width: 95%;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 480px) {
+  .video-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .video-button {
+    font-size: 12px;
+    padding: 8px 16px;
+    margin: 6px;
+  }
+
+  .video-player {
+    width: 100%;
+  }
+
+  .video-button-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
