@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['https://your-frontend-domain.vercel.app', 'http://localhost:5175'],
+  origin: ['https://video-straming-frontend.vercel.app', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'OPTIONS']
 }));
 app.use(express.json());
