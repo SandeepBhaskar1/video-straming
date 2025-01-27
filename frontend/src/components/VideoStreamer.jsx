@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';  // Import the CSS for styling
+import '../App.css';  
 
-// Replace with your actual backend URL
 const BACKEND_URL = import.meta.env.PROD 
   ? 'https://video-straming-backend.vercel.app' 
   : 'http://localhost:5000' || 'http://localhost:2999'
@@ -35,12 +34,10 @@ function VideoStreamer() {
 
   const handleVideoSelect = (videoName) => {
     setSelectedVideo(videoName);
-    // Set the video URL to immediately stream the selected video
     const streamUrl = `${BACKEND_URL}/video?videoName=${encodeURIComponent(videoName)}`;
     setVideoUrl(streamUrl);
   };
 
-  // Mapping video filenames to custom names
   const videoNameMap = {
     'the-fast-and-furious.mp4': 'The Fast and Furious',
     '2-fast-furious.mp4': '2 Fast 2 Furious',
@@ -54,7 +51,6 @@ function VideoStreamer() {
     'fast-x.mp4': 'Fast X',
   };
 
-  // Custom order (manual reordering)
   const customOrder = [
     'the-fast-and-furious.mp4',
     '2-fast-furious.mp4',
@@ -68,7 +64,6 @@ function VideoStreamer() {
     'fast-x.mp4',
   ];
 
-  // Reorder the fetched videos based on customOrder
   const orderedVideos = customOrder.filter(video => videos.includes(video));
 
   return (
@@ -87,7 +82,7 @@ function VideoStreamer() {
             controls 
             src={videoUrl} 
             className="video-player"
-            autoPlay // Automatically play the video when selected
+            autoPlay 
           >
             Your browser does not support the video tag.
           </video>
